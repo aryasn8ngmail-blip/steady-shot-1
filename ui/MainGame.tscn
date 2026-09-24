@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3maingame01"]
+
+[ext_resource type="Script" path="res://ui/MainGame.gd" id="1_maingame"]
+
+[ext_resource type="Script" path="res://horse/Horse.gd" id="2_horse"]
+
+[ext_resource type="Script" path="res://horse/rider/Rider.gd" id="3_rider"]
+
+[ext_resource type="Script" path="res://horse/HorseCamera.gd" id="4_camera"]
+
+[ext_resource type="Script" path="res://controls/balance/BalanceController.gd" id="5_balance"]
+
+[ext_resource type="Script" path="res://environment/MeadowEnvironment.gd" id="6_meadow"]
+
+[ext_resource type="PackedScene" path="res://ui/controls/AnalogStick.tscn" id="7_lstick"]
+
+[ext_resource type="PackedScene" path="res://ui/controls/BalancePad.tscn" id="8_balpad"]
+
+[ext_resource type="PackedScene" path="res://ui/controls/Trigger.tscn" id="9_trigger"]
+
+[node name="MainGame" type="Node3D" node_paths=PackedStringArray("horse", "rider", "horse_camera", "balance_controller", "meadow_environment", "l_stick", "balance_pad", "r_stick", "trigger")]
+script = ExtResource("1_maingame")
+horse = NodePath("Horse")
+rider = NodePath("Horse/Rider")
+horse_camera = NodePath("HorseCamera")
+balance_controller = NodePath("BalanceController")
+meadow_environment = NodePath("MeadowEnvironment")
+l_stick = NodePath("CanvasLayer/HUD/LStick")
+balance_pad = NodePath("CanvasLayer/HUD/BalancePad")
+r_stick = NodePath("CanvasLayer/HUD/RStick")
+trigger = NodePath("CanvasLayer/HUD/Trigger")
+
+[node name="BalanceController" type="Node" parent="."]
+script = ExtResource("5_balance")
+
+[node name="MeadowEnvironment" type="Node3D" parent="."]
+script = ExtResource("6_meadow")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MeadowEnvironment"]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 10, 0)
+
+[node name="Horse" type="Node3D" parent="." node_paths=PackedStringArray("body_mesh_node")]
+script = ExtResource("2_horse")
+body_mesh_node = NodePath("BodyMesh")
+
+[node name="BodyMesh" type="Node3D" parent="Horse"]
+
+[node name="Rider" type="Node3D" parent="Horse" node_paths=PackedStringArray("torso_mesh_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+script = ExtResource("3_rider")
+torso_mesh_node = NodePath("TorsoMesh")
+
+[node name="TorsoMesh" type="Node3D" parent="Horse/Rider"]
+
+[node name="HorseCamera" type="Camera3D" parent="." node_paths=PackedStringArray("target_node")]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3.5, -6)
+script = ExtResource("4_camera")
+target_node = NodePath("../Horse")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LStick" parent="CanvasLayer/HUD" instance=ExtResource("7_lstick")]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 450.0
+offset_right = 240.0
+offset_bottom = 590.0
+
+[node name="BalancePad" parent="CanvasLayer/HUD" instance=ExtResource("8_balpad")]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 420.0
+offset_right = 550.0
+offset_bottom = 620.0
+
+[node name="RStick" parent="CanvasLayer/HUD" instance=ExtResource("7_lstick")]
+layout_mode = 0
+offset_left = 900.0
+offset_top = 450.0
+offset_right = 1040.0
+offset_bottom = 590.0
+control_name = "r_stick"
+
+[node name="Trigger" parent="CanvasLayer/HUD" instance=ExtResource("9_trigger")]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 200.0
+offset_right = 1020.0
+offset_bottom = 380.0

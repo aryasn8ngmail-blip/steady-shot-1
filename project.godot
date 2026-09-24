@@ -23,6 +23,7 @@ config/features=PackedStringArray("4.7", "Forward Plus")
 
 MultiTouchManager="*res://input/MultiTouchManager.gd"
 SettingsManager="*res://core/SettingsManager.gd"
+EventBus="*res://core/EventBus.gd"
 
 [display]
 
