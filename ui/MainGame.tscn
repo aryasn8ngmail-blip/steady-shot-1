@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3maingame01"]
+[gd_scene load_steps=12 format=3 uid="uid://c3maingamescene01"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brown"]
 albedo_color = Color(0.545, 0.353, 0.169, 1.0)
@@ -15,25 +15,17 @@ material = SubResource("StandardMaterial3D_blue")
 radius = 0.15
 height = 0.6
 
-[ext_resource type="Script" path="res://ui/MainGame.gd" id="1_maingame"]
-
-[ext_resource type="Script" path="res://horse/Horse.gd" id="2_horse"]
-
-[ext_resource type="Script" path="res://horse/rider/Rider.gd" id="3_rider"]
-
-[ext_resource type="Script" path="res://horse/HorseCamera.gd" id="4_camera"]
-
-[ext_resource type="Script" path="res://controls/balance/BalanceController.gd" id="5_balance"]
-
-[ext_resource type="Script" path="res://environment/MeadowEnvironment.gd" id="6_meadow"]
-[ext_resource type="Script" path="res://environment/FloatingTarget.gd" id="6_target"]
-[ext_resource type="Script" path="res://environment/Obstacle.gd" id="6_obstacle"]
-
-[ext_resource type="PackedScene" path="res://ui/controls/AnalogStick.tscn" id="7_lstick"]
-
-[ext_resource type="PackedScene" path="res://ui/controls/BalancePad.tscn" id="8_balpad"]
-
-[ext_resource type="PackedScene" path="res://ui/controls/Trigger.tscn" id="9_trigger"]
+[ext_resource type="Script" uid="uid://c3maingamegd01" path="res://ui/MainGame.gd" id="1_maingame"]
+[ext_resource type="Script" uid="uid://c3horsegd00001" path="res://horse/Horse.gd" id="2_horse"]
+[ext_resource type="Script" uid="uid://c3ridergd00001" path="res://horse/rider/Rider.gd" id="3_rider"]
+[ext_resource type="Script" uid="uid://c3cameragd0001" path="res://horse/HorseCamera.gd" id="4_camera"]
+[ext_resource type="Script" uid="uid://c3balancectrl01" path="res://controls/balance/BalanceController.gd" id="5_balance"]
+[ext_resource type="Script" uid="uid://c3meadowenv001" path="res://environment/MeadowEnvironment.gd" id="6_meadow"]
+[ext_resource type="Script" uid="uid://c3floatarget01" path="res://environment/FloatingTarget.gd" id="6_target"]
+[ext_resource type="Script" uid="uid://c3obstacle0001" path="res://environment/Obstacle.gd" id="6_obstacle"]
+[ext_resource type="PackedScene" uid="uid://c3analogstick01" path="res://ui/controls/AnalogStick.tscn" id="7_lstick"]
+[ext_resource type="PackedScene" uid="uid://c3balancepad01" path="res://ui/controls/BalancePad.tscn" id="8_balpad"]
+[ext_resource type="PackedScene" uid="uid://c3trigger01" path="res://ui/controls/Trigger.tscn" id="9_trigger"]
 
 [node name="MainGame" type="Node3D" node_paths=PackedStringArray("horse", "rider", "horse_camera", "balance_controller", "meadow_environment", "l_stick", "balance_pad", "r_stick", "trigger")]
 script = ExtResource("1_maingame")
