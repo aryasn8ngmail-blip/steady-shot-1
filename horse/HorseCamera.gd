@@ -5,7 +5,7 @@ extends Camera3D
 class_name HorseCamera
 
 @export var target_node: Node3D = null
-@export var follow_offset: Vector3 = Vector3(0.0, 3.5, -6.0)
+@export var follow_offset: Vector3 = Vector3(0.0, 3.5, 6.0)
 @export var stiffness: float = 40.0
 @export var damping: float = 12.0
 
