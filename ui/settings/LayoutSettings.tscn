@@ -1,0 +1,137 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3layoutsettings01"]
+
+[ext_resource type="Script" path="res://ui/settings/LayoutSettings.gd" id="1_layout"]
+
+[ext_resource type="PackedScene" uid="uid://c3analogstick01" path="res://ui/controls/AnalogStick.tscn" id="2_stick"]
+[ext_resource type="PackedScene" uid="uid://c3balancepad01" path="res://ui/controls/BalancePad.tscn" id="3_balance"]
+[ext_resource type="PackedScene" uid="uid://c3trigger01" path="res://ui/controls/Trigger.tscn" id="4_trigger"]
+
+[node name="LayoutSettings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_layout")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.14, 0.17, 1)
+
+[node name="Canvas" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LStick" parent="Canvas" instance=ExtResource("2_stick")]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 518.0
+offset_right = 390.0
+offset_bottom = 678.0
+
+[node name="BalancePad" parent="Canvas" instance=ExtResource("3_balance")]
+layout_mode = 0
+offset_left = 486.0
+offset_top = 518.0
+offset_right = 686.0
+offset_bottom = 718.0
+
+[node name="RStick" parent="Canvas" instance=ExtResource("2_stick")]
+layout_mode = 0
+offset_left = 1049.0
+offset_top = 518.0
+offset_right = 1209.0
+offset_bottom = 678.0
+
+[node name="Trigger" parent="Canvas" instance=ExtResource("4_trigger")]
+layout_mode = 0
+offset_left = 1049.0
+offset_top = 252.0
+offset_right = 1169.0
+offset_bottom = 412.0
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 340.0
+offset_bottom = 440.0
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Controller Layout Settings"
+
+[node name="SelectedControlOption" type="OptionButton" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="ScaleLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Scale (0.6x - 1.6x)"
+
+[node name="ScaleSlider" type="HSlider" parent="Panel/VBox"]
+layout_mode = 2
+min_value = 0.6
+max_value = 1.6
+step = 0.05
+value = 1.0
+
+[node name="RotationLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Rotation (0° - 360°)"
+
+[node name="RotationSlider" type="HSlider" parent="Panel/VBox"]
+layout_mode = 2
+max_value = 360.0
+step = 1.0
+
+[node name="OpacityLabel" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Opacity (0.2 - 1.0)"
+
+[node name="OpacitySlider" type="HSlider" parent="Panel/VBox"]
+layout_mode = 2
+min_value = 0.2
+max_value = 1.0
+step = 0.05
+value = 0.85
+
+[node name="MirrorButton" type="Button" parent="Panel/VBox"]
+layout_mode = 2
+text = "Mirror Layout"
+
+[node name="ResetButton" type="Button" parent="Panel/VBox"]
+layout_mode = 2
+text = "Reset to Default Layout"
+
+[node name="RecalibrateButton" type="Button" parent="Panel/VBox"]
+layout_mode = 2
+text = "Recalibrate 4-Finger Touch"
+
+[node name="SavePresetButton" type="Button" parent="Panel/VBox"]
+layout_mode = 2
+text = "Save Layout Preset"
+
+[node name="PresetOption" type="OptionButton" parent="Panel/VBox"]
+layout_mode = 2

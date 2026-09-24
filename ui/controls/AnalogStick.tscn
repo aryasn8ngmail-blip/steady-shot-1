@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3analogstick01"]
+
+[ext_resource type="Script" path="res://controls/AnalogStick.gd" id="1_analog"]
+
+[node name="AnalogStick" type="Control"]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 160.0
+pivot_offset = Vector2(80, 80)
+script = ExtResource("1_analog")

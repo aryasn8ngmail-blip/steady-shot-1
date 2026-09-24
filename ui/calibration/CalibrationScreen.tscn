@@ -1,0 +1,83 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3calibscreen01"]
+
+[ext_resource type="Script" path="res://ui/calibration/CalibrationScreen.gd" id="1_calib"]
+
+[node name="CalibrationScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_calib")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.14, 0.17, 1)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 40.0
+offset_bottom = 120.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "4-Finger Calibration"
+horizontal_alignment = 1
+
+[node name="HintLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Place a finger on the highlighted zone"
+horizontal_alignment = 1
+
+[node name="Zones" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LStickZone" type="ColorRect" parent="Zones"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 400.0
+offset_right = 260.0
+offset_bottom = 560.0
+color = Color(0.37, 0.83, 0.95, 0.4)
+
+[node name="BalanceZone" type="ColorRect" parent="Zones"]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 400.0
+offset_right = 550.0
+offset_bottom = 600.0
+color = Color(0.37, 0.83, 0.95, 0.4)
+
+[node name="RStickZone" type="ColorRect" parent="Zones"]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 400.0
+offset_right = 1080.0
+offset_bottom = 560.0
+color = Color(0.37, 0.83, 0.95, 0.4)
+
+[node name="TriggerZone" type="ColorRect" parent="Zones"]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 180.0
+offset_right = 1060.0
+offset_bottom = 340.0
+color = Color(0.96, 0.65, 0.14, 0.4)
+
+[node name="TimeoutTimer" type="Timer" parent="."]
+one_shot = true
