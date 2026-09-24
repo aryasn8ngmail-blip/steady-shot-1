@@ -22,6 +22,30 @@ func _ready() -> void:
 		eb.horse_stumbled.connect(_on_horse_stumbled)
 		eb.horse_recovered.connect(_on_horse_recovered)
 
+	_setup_torso_mesh()
+
+func _setup_torso_mesh() -> void:
+	if torso_mesh_node == null:
+		torso_mesh_node = get_node_or_null("TorsoMesh") as Node3D
+
+	if torso_mesh_node != null:
+		var mesh_inst: MeshInstance3D = torso_mesh_node as MeshInstance3D
+		if mesh_inst == null:
+			mesh_inst = torso_mesh_node.get_node_or_null("MeshInstance3D") as MeshInstance3D
+			if mesh_inst == null:
+				mesh_inst = MeshInstance3D.new()
+				mesh_inst.name = "MeshInstance3D"
+				torso_mesh_node.add_child(mesh_inst)
+
+		if mesh_inst.mesh == null:
+			var capsule: CapsuleMesh = CapsuleMesh.new()
+			capsule.radius = 0.15
+			capsule.height = 0.6
+			var mat: StandardMaterial3D = StandardMaterial3D.new()
+			mat.albedo_color = Color("#4A90D9") # blue color
+			capsule.material = mat
+			mesh_inst.mesh = capsule
+
 func _process(delta: float) -> void:
 	if is_startled:
 		startle_timer -= delta

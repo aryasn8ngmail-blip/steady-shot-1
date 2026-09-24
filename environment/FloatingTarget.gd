@@ -15,8 +15,29 @@ var base_y: float = 0.0
 
 func _ready() -> void:
 	base_y = position.y
+	_setup_mesh()
 	if is_active:
 		activate_target()
+
+func _setup_mesh() -> void:
+	if get_node_or_null("TargetMesh") != null:
+		return
+
+	var mesh_inst: MeshInstance3D = MeshInstance3D.new()
+	mesh_inst.name = "TargetMesh"
+	var sphere: SphereMesh = SphereMesh.new()
+	sphere.radius = 0.5
+	sphere.height = 1.0
+
+	var mat: StandardMaterial3D = StandardMaterial3D.new()
+	mat.albedo_color = Color("#F5A623") # yellow color
+	mat.emission_enabled = true
+	mat.emission = Color("#F5A623")
+	mat.emission_energy_multiplier = 0.5
+	sphere.material = mat
+
+	mesh_inst.mesh = sphere
+	add_child(mesh_inst)
 
 func activate_target() -> void:
 	is_active = true

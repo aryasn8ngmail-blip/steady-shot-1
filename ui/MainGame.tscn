@@ -1,4 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3maingame01"]
+[gd_scene load_steps=12 format=3 uid="uid://c3maingame01"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brown"]
+albedo_color = Color(0.545, 0.353, 0.169, 1.0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_horse"]
+material = SubResource("StandardMaterial3D_brown")
+size = Vector3(0.6, 0.8, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blue"]
+albedo_color = Color(0.29, 0.565, 0.851, 1.0)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rider"]
+material = SubResource("StandardMaterial3D_blue")
+radius = 0.15
+height = 0.6
 
 [ext_resource type="Script" path="res://ui/MainGame.gd" id="1_maingame"]
 
@@ -11,6 +26,8 @@
 [ext_resource type="Script" path="res://controls/balance/BalanceController.gd" id="5_balance"]
 
 [ext_resource type="Script" path="res://environment/MeadowEnvironment.gd" id="6_meadow"]
+[ext_resource type="Script" path="res://environment/FloatingTarget.gd" id="6_target"]
+[ext_resource type="Script" path="res://environment/Obstacle.gd" id="6_obstacle"]
 
 [ext_resource type="PackedScene" path="res://ui/controls/AnalogStick.tscn" id="7_lstick"]
 
@@ -33,27 +50,39 @@ trigger = NodePath("CanvasLayer/HUD/Trigger")
 [node name="BalanceController" type="Node" parent="."]
 script = ExtResource("5_balance")
 
-[node name="MeadowEnvironment" type="Node3D" parent="."]
+[node name="MeadowEnvironment" type="Node3D" parent="." node_paths=PackedStringArray("target_node", "obstacle_node")]
 script = ExtResource("6_meadow")
+target_node = NodePath("FloatingTarget")
+obstacle_node = NodePath("Obstacle")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="MeadowEnvironment"]
 transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 10, 0)
+
+[node name="FloatingTarget" type="Node3D" parent="MeadowEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -20)
+script = ExtResource("6_target")
+
+[node name="Obstacle" type="Area3D" parent="MeadowEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -10)
+script = ExtResource("6_obstacle")
 
 [node name="Horse" type="Node3D" parent="." node_paths=PackedStringArray("body_mesh_node")]
 script = ExtResource("2_horse")
 body_mesh_node = NodePath("BodyMesh")
 
-[node name="BodyMesh" type="Node3D" parent="Horse"]
+[node name="BodyMesh" type="MeshInstance3D" parent="Horse"]
+mesh = SubResource("BoxMesh_horse")
 
 [node name="Rider" type="Node3D" parent="Horse" node_paths=PackedStringArray("torso_mesh_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 script = ExtResource("3_rider")
 torso_mesh_node = NodePath("TorsoMesh")
 
-[node name="TorsoMesh" type="Node3D" parent="Horse/Rider"]
+[node name="TorsoMesh" type="MeshInstance3D" parent="Horse/Rider"]
+mesh = SubResource("CapsuleMesh_rider")
 
 [node name="HorseCamera" type="Camera3D" parent="." node_paths=PackedStringArray("target_node")]
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3.5, -6)
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3.5, 6)
 script = ExtResource("4_camera")
 target_node = NodePath("../Horse")
 

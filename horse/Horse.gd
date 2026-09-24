@@ -37,6 +37,30 @@ func _ready() -> void:
 		eb.horse_stumbled.connect(_on_stumbled)
 		eb.horse_recovered.connect(_on_recovered)
 
+	_setup_body_mesh()
+
+func _setup_body_mesh() -> void:
+	if body_mesh_node == null:
+		body_mesh_node = get_node_or_null("BodyMesh") as Node3D
+
+	if body_mesh_node != null:
+		var mesh_inst: MeshInstance3D = body_mesh_node as MeshInstance3D
+		if mesh_inst == null:
+			# If body_mesh_node is a Node3D but not MeshInstance3D, replace or add MeshInstance3D child
+			mesh_inst = body_mesh_node.get_node_or_null("MeshInstance3D") as MeshInstance3D
+			if mesh_inst == null:
+				mesh_inst = MeshInstance3D.new()
+				mesh_inst.name = "MeshInstance3D"
+				body_mesh_node.add_child(mesh_inst)
+
+		if mesh_inst.mesh == null:
+			var box: BoxMesh = BoxMesh.new()
+			box.size = Vector3(0.6, 0.8, 1.5) # 1.5 x 0.8 x 0.6 brown box
+			var mat: StandardMaterial3D = StandardMaterial3D.new()
+			mat.albedo_color = Color("#8B5A2B") # brown color
+			box.material = mat
+			mesh_inst.mesh = box
+
 func set_stick_input(input: Vector2) -> void:
 	stick_input = input
 

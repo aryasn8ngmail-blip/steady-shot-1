@@ -18,6 +18,35 @@ func _ready() -> void:
 	noise.seed = 42
 	noise.frequency = 0.05
 
+	if target_node == null:
+		target_node = find_child("FloatingTarget", true, false) as FloatingTarget
+		if target_node == null:
+			target_node = get_node_or_null("FloatingTarget") as FloatingTarget
+
+	if obstacle_node == null:
+		obstacle_node = find_child("Obstacle", true, false) as Obstacle
+		if obstacle_node == null:
+			obstacle_node = get_node_or_null("Obstacle") as Obstacle
+
+	_setup_ground_mesh()
+
+func _setup_ground_mesh() -> void:
+	if get_node_or_null("GroundMesh") != null:
+		return
+
+	var ground_instance: MeshInstance3D = MeshInstance3D.new()
+	ground_instance.name = "GroundMesh"
+	var plane_mesh: PlaneMesh = PlaneMesh.new()
+	plane_mesh.size = Vector2(200.0, 200.0)
+
+	var mat: StandardMaterial3D = StandardMaterial3D.new()
+	mat.albedo_color = grass_color
+	mat.roughness = 0.8
+	plane_mesh.material = mat
+
+	ground_instance.mesh = plane_mesh
+	add_child(ground_instance)
+
 func get_terrain_slope_at(world_pos: Vector3) -> Vector2:
 	# Calculate terrain gradient/slope at position using noise
 	var sample_dist: float = 0.5
